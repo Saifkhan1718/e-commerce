@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Saif Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 🔵 Top Navbar -->
+    <nav class="topbar">
+        <div class="logo">🛍 Saif Store</div>
+    
+        <div class="search-box">
+            <input type="text" placeholder="Search products...">
+            <button>🔍</button>
+        </div>
+    
+        <div class="nav-links">
+            <span>Account</span>
+            <span onclick="window.location.href='cart.html'">Cart</span>
+            <span>Cart</span>
+        </div>
+    </nav>
+    
+    <div class="main-layout">
+    
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Categories</h3>
+            <ul>
+                <li class="active">All</li>
+                <li>Electronics</li>
+                <li>Fashion</li>
+                <li>Home & Kitchen</li>
+                <li>Books</li>
+                <li>Sports</li>
+                <li>Beauty</li>
+            </ul>
+    
+            <h3>Price Range</h3>
+            <input type="range" min="0" max="500" value="500">
+            <p>$0 — $500</p>
+        </aside>
+    
+        <!-- Products Section -->
+        <section class="products-wrapper">
+            <h2>All Products</h2>
+            <div id="products" class="product-grid"></div>
+        </section>
+    
+    </div>
+    
+    <script src="script.js"></script>
+    
+    </body>
+</html>
