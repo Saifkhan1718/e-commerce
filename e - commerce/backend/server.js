@@ -1,11 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());  // ← THIS IS REQUIRED
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 mongoose.connect("mongodb://127.0.0.1:27017/ecommerce")
     .then(() => console.log("MongoDB Connected"));

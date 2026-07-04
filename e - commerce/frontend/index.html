@@ -1,56 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Saif Store</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saif Store - Single Page App</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="login-active">
 
-    <!-- 🔵 Top Navbar -->
-    <nav class="topbar">
-        <div class="logo">🛍 Saif Store</div>
+    <!-- 🔵 Top Navbar (Hidden on Login screen) -->
+    <nav class="topbar" id="top-navbar" style="display: none;">
+        <div class="logo" onclick="navigateTo('shop')" style="cursor: pointer;">🛍 Saif Store</div>
     
         <div class="search-box">
-            <input type="text" placeholder="Search products...">
-            <button>🔍</button>
+            <input type="text" id="search-input" placeholder="Search products...">
+            <button onclick="handleSearch()">🔍</button>
         </div>
     
         <div class="nav-links">
-            <span>Account</span>
-            <span onclick="window.location.href='cart.html'">Cart</span>
-            <span>Cart</span>
+            <span onclick="logout()">Logout</span>
+            <span onclick="navigateTo('cart')" style="font-weight: bold;">Cart <span id="cart-count">(0)</span></span>
         </div>
     </nav>
-    
-    <div class="main-layout">
-    
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h3>Categories</h3>
-            <ul>
-                <li class="active">All</li>
-                <li>Electronics</li>
-                <li>Fashion</li>
-                <li>Home & Kitchen</li>
-                <li>Books</li>
-                <li>Sports</li>
-                <li>Beauty</li>
-            </ul>
-    
-            <h3>Price Range</h3>
-            <input type="range" min="0" max="500" value="500">
-            <p>$0 — $500</p>
-        </aside>
-    
-        <!-- Products Section -->
-        <section class="products-wrapper">
-            <h2>All Products</h2>
-            <div id="products" class="product-grid"></div>
-        </section>
-    
+
+    <!-- 🟡 1. Login View -->
+    <div id="login-view" class="view-container active">
+        <canvas id="particles"></canvas>
+        <div class="moon"></div>
+        
+        <div class="login-card">
+            <h1>🛒 Saif Store</h1>
+            <p class="subtitle">Enter The Future of Shopping</p>
+        
+            <div class="input-group">
+                <input type="email" id="email" required>
+                <label>Email</label>
+            </div>
+        
+            <div class="input-group">
+                <input type="password" id="password" required>
+                <label>Password</label>
+            </div>
+        
+            <button id="loginBtn" onclick="handleLogin()">
+                <span class="btn-text">Login</span>
+                <div class="loader" id="loginLoader"></div>
+            </button>
+        
+            <p id="message"></p>
+        </div>
     </div>
-    
-    <script src="script.js"></script>
-    
-    </body>
+
+    <!-- 🟢 2. Shop View -->
+    <div id="shop-view" class="view-container">
+        <div class="main-layout" style="width: 100%;">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>Categories</h3>
+                <ul id="category-list">
+                    <li class="active" onclick="filterCategory('All', this)">All</li>
+                    <li onclick="filterCategory('Electronics', this)">Electronics</li>
+                    <li onclick="filterCategory('Fashion', this)">Fashion</li>
+                    <li onclick="filterCategory('Home & Kitchen', this)">Home & Kitchen</li>
+                    <li onclick="filterCategory('Books', this)">Books</li>
+                    <li onclick="filterCategory('Sports', this)">Sports</li>
+                    <li onclick="filterCategory('Beauty', this)">Beauty</li>
+                </ul>
+        
+                <h3>Price Range</h3>
+                <input type="range" id="price-range" min="0" max="70000" value="70000" oninput="filterPrice(this.value)">
+                <p>Max: ₹<span id="price-val">70000</span></p>
+            </aside>
+        
+            <!-- Products Section -->
+            <section class="products-wrapper">
+                <h2 id="current-category-title">All Products</h2>
+                <div id="products" class="product-grid"></div>
+            </section>
+        </div>
+    </div>
+
+    <!-- 🟣 3. Product Details View -->
+    <div id="product-view" class="view-container">
+        <div class="product-page">
+            <div class="product-image">
+                <img id="productImage" alt="Product Image">
+            </div>
+        
+            <div class="product-info">
+                <h2 id="productName">Product Name</h2>
+                <div class="rating">★★★★☆ (1,200 reviews)</div>
+                <p class="price" id="productPrice">₹0</p>
+                <p class="description">
+                    High quality product with premium build and long durability. Experience state-of-the-art functionality and unparalleled convenience.
+                </p>
+                <button id="addBtn" class="cart-btn" style="width: auto;">
+                    Add to Cart
+                </button>
+                <button onclick="navigateTo('shop')" style="background-color: #ccc; width: auto; margin-left: 10px;" class="cart-btn">
+                    Back to Shop
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔵 4. Cart View -->
+    <div id="cart-view" class="view-container">
+        <h2 class="cart-title">Your Shopping Cart</h2>
+        <ul id="cartItems" class="cart">
+            <li>Loading cart items...</li>
+        </ul>
+        <h3 id="total" style="text-align: center; margin-top: 15px; font-size: 22px;">Total: ₹0</h3>
+        <div style="max-width: 500px; margin: 20px auto; text-align: center; display: flex; gap: 15px;">
+            <button onclick="navigateTo('shop')" style="background-color: #ccc; flex: 1; padding: 12px; font-weight: bold; border-radius: 25px;">Back to Shop</button>
+            <button onclick="handleCheckout()" style="background-color: #FFD814; flex: 1; padding: 12px; font-weight: bold; border-radius: 25px;">Proceed to Payment</button>
+        </div>
+    </div>
+
+    <script src="particles.js"></script>
+    <script src="app.js"></script>
+</body>
 </html>
