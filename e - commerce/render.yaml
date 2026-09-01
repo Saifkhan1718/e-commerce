@@ -3,7 +3,6 @@ services:
     name: saif-ecommerce-backend
     env: node
     region: singapore
-    rootDir: backend
     buildCommand: npm install
     startCommand: node server.js
     envVars:
