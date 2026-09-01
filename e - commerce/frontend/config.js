@@ -11,6 +11,6 @@ const isLocalhost = Boolean(
 // When deployed on Vercel, fallback to Render backend API endpoint (or window override).
 const API_BASE_URL = isLocalhost
     ? "http://localhost:5000"
-    : (window.API_BASE_URL || "https://saif-ecommerce-backend.onrender.com");
+    : (window.API_BASE_URL || "https://e-commerce-mbcx.onrender.com");
 
 console.log(`[Config] API Base URL set to: ${API_BASE_URL}`);
