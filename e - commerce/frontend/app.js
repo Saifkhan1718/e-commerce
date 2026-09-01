@@ -68,7 +68,7 @@ function handleLogin() {
     if (loader) loader.style.display = "block";
     if (messageEl) messageEl.innerText = "";
 
-    fetch("http://localhost:5000/api/auth/login", {
+    fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
@@ -99,7 +99,7 @@ function logout() {
 
 // 📦 PRODUCTS & CATEGORY FILTER LOGIC
 function fetchProducts() {
-    fetch("http://localhost:5000/api/products")
+    fetch(`${API_BASE_URL}/api/products`)
         .then(res => res.json())
         .then(data => {
             allProducts = data;
@@ -205,7 +205,7 @@ function handleAddToCart(productId, btnElement) {
     btnElement.classList.add("added-feedback");
     btnElement.disabled = true;
 
-    fetch("http://localhost:5000/api/cart/add", {
+    fetch(`${API_BASE_URL}/api/cart/add`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -242,7 +242,7 @@ function handleAddToCart(productId, btnElement) {
 }
 
 function loadCartCount() {
-    fetch("http://localhost:5000/api/cart", {
+    fetch(`${API_BASE_URL}/api/cart`, {
         headers: { "Authorization": localStorage.getItem("token") || "" }
     })
     .then(res => res.json())
@@ -268,7 +268,7 @@ function fetchCart() {
 
     if (cartItemsList) cartItemsList.innerHTML = "<li>Loading cart items...</li>";
 
-    fetch("http://localhost:5000/api/cart", {
+    fetch(`${API_BASE_URL}/api/cart`, {
         headers: { "Authorization": localStorage.getItem("token") || "" }
     })
     .then(res => res.json())
@@ -327,7 +327,7 @@ function renderCartView() {
 }
 
 function updateCartQuantity(productId, action) {
-    fetch("http://localhost:5000/api/cart/update", {
+    fetch(`${API_BASE_URL}/api/cart/update`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -344,7 +344,7 @@ function updateCartQuantity(productId, action) {
 }
 
 function removeCartItem(productId) {
-    fetch("http://localhost:5000/api/cart/remove", {
+    fetch(`${API_BASE_URL}/api/cart/remove`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -367,7 +367,7 @@ function handleCheckout() {
         return;
     }
 
-    fetch("http://localhost:5000/api/orders/checkout", {
+    fetch(`${API_BASE_URL}/api/orders/checkout`, {
         method: "POST",
         headers: { "Authorization": localStorage.getItem("token") || "" }
     })

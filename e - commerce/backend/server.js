@@ -5,12 +5,25 @@ const path = require("path");
 
 const app = express();
 
+// Middleware
 app.use(cors());
-app.use(express.json());  // ← THIS IS REQUIRED
+app.use(express.json());
+
+// Serve static frontend files
 app.use(express.static(path.join(__dirname, "../frontend")));
 
-mongoose.connect("mongodb://127.0.0.1:27017/ecommerce")
-    .then(() => console.log("MongoDB Connected"));
+// Environment configurations
+const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/ecommerce";
+const PORT = process.env.PORT || 5000;
+
+// Database Connection
+mongoose.connect(MONGO_URI)
+    .then(() => console.log("MongoDB Connected Successfully"))
+    .catch((err) => console.error("MongoDB Connection Error:", err));
+
+// API Routes
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth", authRoutes);
 
 const productRoutes = require("./routes/productRoutes");
 app.use("/api/products", productRoutes);
@@ -21,11 +34,17 @@ app.use("/api/cart", cartRoutes);
 const orderRoutes = require("./routes/orderRoutes");
 app.use("/api/orders", orderRoutes);
 
-app.listen(5000, () => {
-    console.log("Server running on port 5000");
-
-    const authRoutes = require("./routes/authRoutes");
-app.use("/api/auth", authRoutes);
-
+// Health check endpoint
+app.get("/api/health", (req, res) => {
+    res.json({ status: "ok", message: "Saif Store Backend API is running" });
 });
 
+// Fallback to index.html for SPA routing
+app.get('/{*splat}', (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/index.html"));
+});
+
+// Start Server
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
