@@ -39,7 +39,7 @@ app.get("/api/health", (req, res) => {
     res.json({ status: "ok", message: "Saif Store Backend API is running" });
 });
 
-// Fallback to index.html for SPA routing
+// Fallback to index.html for application routing
 app.get('/{*splat}', (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });

@@ -1,6 +1,6 @@
-# 🛒 Saif Store - E-Commerce Single Page Application (SPA)
+# 🛒 Saif Store - E-Commerce Web Application
 
-A modern, full-stack E-Commerce Single Page Application (SPA) built with Vanilla JavaScript, HTML5 Canvas particles, CSS3 glassmorphism design system, Node.js, Express API, and MongoDB Cloud Database.
+A modern, full-stack E-Commerce web application built with Vanilla JavaScript, HTML5 Canvas particles, CSS3 glassmorphism design system, Node.js, Express API, and MongoDB Cloud Database.
 
 ---
 
@@ -15,7 +15,7 @@ A modern, full-stack E-Commerce Single Page Application (SPA) built with Vanilla
 ## ✨ Key Features
 
 - **Interactive Canvas UI**: Animated particle background canvas on the login screen (`particles.js`).
-- **Single Page Navigation**: Seamless view switching without page reloads (Login ➔ Shop ➔ Product Details ➔ Cart View).
+- **Dynamic Navigation**: Seamless view switching between Login, Shop, Product Details, and Cart View.
 - **Real-Time Product Discovery**: Filter products dynamically by categories (*Electronics, Fashion, Home & Kitchen, Books, Sports, Beauty*), price range slider, and search query.
 - **Cart Management**: Add items to cart, modify item quantities (`+` / `-`), delete items, and calculate total order price in real time with synchronized top navbar badge.
 - **Payment & Checkout Simulation**: Process simulated payments and clear cart contents upon order confirmation.

@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
     navigateTo("login");
 });
 
-// CENTRAL SPA NAVIGATION
+// CENTRAL NAVIGATION
 function navigateTo(view, params = {}) {
-    console.log(`SPA Navigating to: ${view}`, params);
+    console.log(`Navigating to: ${view}`, params);
 
     // 1. Manage Active Class on Views
     const views = ["login-view", "shop-view", "product-view", "cart-view"];
