@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
 const Product = require("./models/Product");
 
-mongoose.connect("mongodb://127.0.0.1:27017/ecommerce")
-    .then(() => console.log("MongoDB Connected"));
+const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/ecommerce";
+
+mongoose.connect(MONGO_URI)
+    .then(() => console.log("MongoDB Connected Successfully"))
+    .catch((err) => console.error("MongoDB Connection Error:", err));
 
 const products = [
     { name: "HP Laptop", price: 52000, image: "https://m.media-amazon.com/images/I/71an9eiBxpL._SX679_.jpg", category: "Electronics" },
