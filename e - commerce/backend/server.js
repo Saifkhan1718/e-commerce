@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend")));
 
 // Environment configurations
-const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/ecommerce";
+const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://saif:ZKIIjap7nCWwinU7@saif.amdq2i8.mongodb.net/ecommerce?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
 // Database Connection
