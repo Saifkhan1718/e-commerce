@@ -5,14 +5,9 @@ let currentCategory = "All";
 let maxPrice = 70000;
 let searchQuery = "";
 
-// Initial Setup on load
+// Initial Setup on load - Always start at Login view
 document.addEventListener("DOMContentLoaded", () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-        navigateTo("shop");
-    } else {
-        navigateTo("login");
-    }
+    navigateTo("login");
 });
 
 // CENTRAL SPA NAVIGATION
